@@ -1,0 +1,13 @@
+== /
+200 text/html 2745B
+== /menu
+200 text/html 2745B
+== /about
+200 text/html 2745B
+== /about.html
+301 text/html 795B
+== /favicon.svg
+200 image/svg+xml 5847B
+== /assets/img/hero-cups-1600.webp
+200 image/webp 132330B
+www redirect: 301 -> https://www.bretlyn.com/
