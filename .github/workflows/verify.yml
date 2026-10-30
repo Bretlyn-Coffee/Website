@@ -1,0 +1,33 @@
+name: Verify live site
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [mui-dev]
+    paths: ['.github/workflows/verify.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch live pages
+        run: |
+          mkdir out && cd out
+          for u in / /menu /about /about.html /favicon.svg /assets/img/hero-cups-1600.webp; do
+            echo "== $u" >> report.txt
+            curl -sS -o /dev/null -w "%{http_code} %{content_type} %{size_download}B\n" "https://bretlyn.com$u?nocache=$RANDOM" >> report.txt
+          done
+          curl -sSI "https://bretlyn.com/" > headers.txt
+          curl -sS "https://bretlyn.com/?nocache=$RANDOM" > home.html
+          curl -sS "http://www.bretlyn.com/" -o /dev/null -w "www redirect: %{http_code} -> %{redirect_url}\n" >> report.txt
+          echo | openssl s_client -servername bretlyn.com -connect bretlyn.com:443 2>/dev/null | openssl x509 -noout -subject -issuer -dates -ext subjectAltName > cert.txt || true
+      - name: Publish report
+        run: |
+          cd out
+          git init -q -b verify-output
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git add -A && git commit -qm "verify"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" verify-output
