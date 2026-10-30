@@ -1,0 +1,34 @@
+name: Build preview
+
+on:
+  push:
+    branches: [mui-dev]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build
+        run: |
+          set -o pipefail
+          (npm install --no-audit --no-fund && npm run build) 2>&1 | tee build.log
+      - name: Publish build output to preview-build branch
+        if: always()
+        run: |
+          mkdir -p out && cp build.log out/ || true
+          [ -d dist ] && cp -r dist out/dist || true
+          [ -f package-lock.json ] && cp package-lock.json out/ || true
+          cd out
+          git init -q -b preview-build
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A && git commit -qm "preview ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" preview-build
