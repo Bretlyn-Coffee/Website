@@ -13,12 +13,13 @@ import '@fontsource/outfit/600.css';
 import './global.css';
 import theme from './theme';
 import App from './App';
+import { BASE } from './base';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
+      <BrowserRouter basename={BASE.replace(/\/$/, '') || '/'}>
         <App />
       </BrowserRouter>
     </ThemeProvider>

@@ -1,10 +1,14 @@
-# ---- Bretlyn Coffee (React + MUI) — Apache config for Hostinger ----
+# ---- Bretlyn Coffee (React + MUI) — Apache config ----
+# Works on Hostinger (bretlyn.com) and locally in XAMPP (htdocs/<any folder>).
 Options -Indexes
 DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # --- Live site only (bretlyn.com) ---
   # Force HTTPS
+  RewriteCond %{HTTP_HOST} bretlyn\.com$ [NC]
   RewriteCond %{HTTPS} off
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
@@ -12,18 +16,18 @@ DirectoryIndex index.html
   RewriteCond %{HTTP_HOST} ^www\.bretlyn\.com$ [NC]
   RewriteRule ^ https://bretlyn.com%{REQUEST_URI} [L,R=301]
   # Old static URLs -> new routes
-  RewriteRule ^about\.html$ /about [L,R=301]
-  RewriteRule ^menu\.html$ /menu [L,R=301]
-  RewriteRule ^privacy-policy\.html$ /privacy-policy [L,R=301]
-  RewriteRule ^terms\.html$ /terms [L,R=301]
-  # Single-page app: send unknown paths to index.html
+  RewriteCond %{HTTP_HOST} bretlyn\.com$ [NC]
+  RewriteRule ^(about|menu|privacy-policy|terms)\.html$ https://bretlyn.com/$1 [L,R=301]
+
+  # --- Everywhere: single-page app routing ---
+  # Unknown paths load index.html from this folder (no leading slash keeps it
+  # inside the folder, e.g. htdocs/Bretlyn Coffee Website/).
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^ /index.html [L]
+  RewriteRule ^ index.html [L]
 </IfModule>
 
 <IfModule mod_headers.c>
-  Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"

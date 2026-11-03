@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import BrandMark from '../brand/BrandMark';
 import { MARK_PATH, MARK_VIEWBOX } from '../brand/markPath';
+import { asset } from '../base';
 import Reveal from './Reveal';
 import { brand, display, ease } from '../theme';
 
@@ -17,7 +18,7 @@ export function usePageMeta(title, description) {
     const m = document.querySelector('meta[name="description"]');
     if (m && description) m.setAttribute('content', description);
     const c = document.querySelector('link[rel="canonical"]');
-    if (c) c.setAttribute('href', `https://bretlyn.com${window.location.pathname}`);
+    if (c && window.location.hostname.endsWith('bretlyn.com')) c.setAttribute('href', `https://bretlyn.com${window.location.pathname}`);
   }, [title, description]);
 }
 
@@ -47,11 +48,11 @@ export function Photo({ name, alt, w = 960, h, ratio = '4/3', priority = false, 
   const sizes = '(max-width:980px) 92vw, 46vw';
   return (
     <Box component="picture" sx={{ display: 'contents' }}>
-      <source type="image/webp" srcSet={`/assets/img/${name}-960.webp 960w, /assets/img/${name}-1600.webp 1600w`} sizes={sizes} />
+      <source type="image/webp" srcSet={`${asset(`assets/img/${name}-960.webp`)} 960w, ${asset(`assets/img/${name}-1600.webp`)} 1600w`} sizes={sizes} />
       <Box
         component="img"
-        src={`/assets/img/${name}-960.jpg`}
-        srcSet={`/assets/img/${name}-960.jpg 960w, /assets/img/${name}-1600.jpg 1600w`}
+        src={asset(`assets/img/${name}-960.jpg`)}
+        srcSet={`${asset(`assets/img/${name}-960.jpg`)} 960w, ${asset(`assets/img/${name}-1600.jpg`)} 1600w`}
         sizes={sizes}
         alt={alt}
         width={w}
