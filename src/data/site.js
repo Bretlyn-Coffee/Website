@@ -19,34 +19,40 @@ export const SOCIAL = [
 
 export const REGIONS = ['Chikmagalur', 'Coorg', 'Araku Valley', 'Wayanad', 'Nilgiris', 'Baba Budangiri'];
 
-// >>> Edit menu items and prices here (₹, placeholders) <<<
+// >>> Edit the menu here <<<
+// Each category: id, name, subtitle, items. An item has a name, up to 3 description lines,
+// an optional photo (file name in public/assets/img/menu/, without extension) and an
+// illustration type used when there is no photo: 'hot' | 'latte' | 'americano' | 'frappe'.
+// Categories with `hotIced: true` show the HOT / ICED switch.
 export const MENU = [
-  { id: 'hot', name: 'Hot Coffee', sub: 'Espresso based', items: [
-    ['Espresso', 'A concentrated double shot of our house single origin.', 120],
-    ['Americano', 'Espresso lengthened with hot water. Smooth and bold.', 140],
-    ['Cappuccino', 'Equal parts espresso, steamed milk and silky foam.', 170],
-    ['Classic Latte', 'Espresso with steamed milk and a thin layer of microfoam.', 180],
-    ['Flat White', 'Double ristretto with velvety milk. Strong and smooth.', 190],
-    ['Mocha', 'Espresso, dark chocolate and steamed milk.', 210],
+  { id: 'signature', name: 'Signature Lattes', sub: 'Your favourites, hot or iced.', hotIced: true, items: [
+    { name: 'Coconut Latte', photo: 'coconut-latte', lines: ['Rich espresso meets mellow coconut flavour.', 'Creamy milk brings everything together.', 'Smooth and gently sweet with a tropical finish.'] },
+    { name: 'Spanish Latte', photo: 'spanish-latte', lines: ['Bold espresso meets sweet, creamy milk.', 'Rich coffee flavour balances the sweetness.', 'Smooth and comforting from the first sip.'] },
+    { name: 'Ube Latte', photo: 'ube-latte', lines: ['Earthy ube meets the depth of espresso.', 'Creamy milk softens its gently nutty flavour.', 'Mellow sweetness with a smooth, rich finish.'] },
+    { name: 'Caramel Velvet Latte', photo: 'caramel-velvet-latte', lines: ['Rich espresso blends with buttery caramel.', 'A velvety cream layer adds a soft finish.', 'Caramel drizzle brings a little extra sweetness.'] },
+    { name: 'Vanilla Velvet Latte', photo: 'vanilla-velvet-latte', lines: ['Smooth espresso meets delicate vanilla flavour.', 'A velvety cream layer adds a creamy finish.', 'Gently sweet with warm vanilla in every sip.'] },
   ] },
-  { id: 'iced', name: 'Iced Coffee', sub: 'Served over ice', items: [
-    ['Iced Americano', 'Double shot over ice and chilled water.', 160],
-    ['Iced Latte', 'Cold milk layered with fresh espresso.', 190],
-    ['Iced Spanish Latte', 'Espresso, condensed milk and cold milk.', 220],
-    ['Cold Brew', 'Steeped for 18 hours for a naturally sweet cup.', 200],
-    ['Vietnamese Iced Coffee', 'Strong coffee with sweetened condensed milk.', 210],
-    ['Espresso Tonic', 'Espresso poured over tonic water and citrus.', 220],
+  { id: 'hot', name: 'Hot Beverages', sub: 'Espresso classics, made fresh.', items: [
+    { name: 'Espresso', art: 'hot', lines: ['A concentrated double shot of our house coffee.'] },
+    { name: 'Americano', art: 'hot', lines: ['Espresso lengthened with hot water.', 'Smooth and bold.'] },
+    { name: 'Cappuccino', art: 'hot', lines: ['Equal parts espresso, steamed milk and silky foam.'] },
+    { name: 'Classic Latte', art: 'hot', lines: ['Espresso with steamed milk and a thin layer of microfoam.'] },
+    { name: 'Flat White', art: 'hot', lines: ['Double ristretto with velvety milk.', 'Strong and smooth.'] },
+    { name: 'Mocha', art: 'hot', lines: ['Espresso, dark chocolate and steamed milk.'] },
   ] },
-  { id: 'frappe', name: 'Frappés', sub: 'Blended & indulgent', items: [
-    ['Caramel Frappé', 'Blended coffee, whipped cream, caramel drizzle.', 240],
-    ['Mocha Frappé', 'Coffee blended with chocolate and topped with cream.', 240],
-    ['Hazelnut Frappé', 'Nutty, creamy and perfectly chilled.', 250],
-    ['Classic Coffee Frappé', 'Just coffee, milk and ice, blended smooth.', 220],
+  { id: 'cold', name: 'Cold Beverages', sub: 'Chilled, bright and refreshing.', items: [
+    { name: 'Iced Americano', art: 'americano', lines: ['Double shot over ice and chilled water.'] },
+    { name: 'Iced Latte', art: 'latte', lines: ['Cold milk layered with fresh espresso.'] },
+    { name: 'Cold Brew', art: 'americano', lines: ['Slow-steeped for a naturally sweet cup.'] },
+    { name: 'Espresso Tonic', art: 'americano', lines: ['Espresso poured over tonic water and citrus.'] },
   ] },
-  { id: 'brew', name: 'Manual Brews', sub: 'Single origin, by hand', items: [
-    ['Pour Over', "Choose today's single origin, brewed by hand.", 220],
-    ['AeroPress', 'Full-bodied and clean, brewed to order.', 210],
-    ['French Press', 'Rich and textured. Serves one or two.', 230],
-    ['South Indian Filter Kaapi', 'Our tribute to the classic — decoction and frothy milk.', 120],
+  { id: 'matcha', name: 'Matcha & Ube Series', sub: 'Vibrant, creamy and full of character.', items: [
+    { name: 'Ube Latte', photo: 'ube-latte', lines: ['Earthy ube meets the depth of espresso.', 'Creamy milk softens its gently nutty flavour.', 'Mellow sweetness with a smooth, rich finish.'] },
   ] },
+  { id: 'frappes', name: 'Frappes', sub: 'Blended, creamy and indulgent.', items: [
+    { name: 'Caramel Frappe', art: 'frappe', lines: ['Blended coffee, whipped cream and caramel drizzle.'] },
+    { name: 'Mocha Frappe', art: 'frappe', lines: ['Coffee blended with chocolate, topped with cream.'] },
+    { name: 'Classic Coffee Frappe', art: 'frappe', lines: ['Just coffee, milk and ice, blended smooth.'] },
+  ] },
+  { id: 'treats', name: 'Bretlyn Treats', sub: 'Little bites to go with your cup.', items: [] },
 ];
