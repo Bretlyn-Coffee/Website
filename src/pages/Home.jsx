@@ -32,7 +32,7 @@ function Hero() {
     <Box component="section" onMouseMove={onMove} sx={{
       position: 'relative', overflow: 'hidden', color: '#fff', display: 'flex', alignItems: 'center',
       minHeight: { md: '100svh' },
-      background: 'radial-gradient(120% 90% at 85% 40%, #4f8bff 0%, #2563ff 35%, #1240d6 65%, #0a2378 100%)',
+      background: 'radial-gradient(90% 80% at 74% 48%, #004ca2 0%, #00408c 38%, #00316f 70%, #062258 100%)',
     }}>
       <Box aria-hidden sx={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
         {BEANS.map((b, i) => (
@@ -66,11 +66,14 @@ function Hero() {
 
           <Box ref={visual} sx={{ position: 'relative', aspectRatio: '1 / 1', width: '100%', maxWidth: { xs: 'min(440px, 86vw)', md: 'none' },
             mx: 'auto', transition: `transform .3s ${ease}` }}>
-            <Box sx={{ position: 'absolute', inset: 0, borderRadius: { xs: '22px', md: '28px' }, overflow: 'hidden',
-              boxShadow: '0 40px 80px -30px rgba(0,0,0,.55)', animation: 'float 7s ease-in-out infinite',
-              '&::after': { content: '""', position: 'absolute', inset: 0, borderRadius: 'inherit', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,.18)' } }}>
+            <Box sx={{ position: 'absolute', inset: '-4%', animation: 'float 7s ease-in-out infinite',
+              // Feather every edge so the photo melts into the hero background instead of looking like a separate card
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 10%, #000 72%, transparent 100%)',
+              WebkitMaskComposite: 'source-in',
+              maskImage: 'linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 10%, #000 72%, transparent 100%)',
+              maskComposite: 'intersect' }}>
               <Photo name="hero-cups" priority w={1280} h={1279} ratio="1 / 1"
-                alt="Bretlyn hot latte, iced americano, iced latte and caramel frappé" />
+                alt="Bretlyn hot latte, iced americano, iced latte and caramel frappé" sx={{ filter: 'none' }} />
             </Box>
           </Box>
         </Box>

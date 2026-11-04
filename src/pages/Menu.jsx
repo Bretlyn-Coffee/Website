@@ -18,7 +18,7 @@ const PHOTO_BG = 'radial-gradient(70% 60% at 50% 40%, #a9cfff 0%, #3d8bff 45%, #
 function DrinkImage({ item }) {
   const usePhoto = Boolean(item.photo);
   return (
-    <Box sx={{ position: 'relative', aspectRatio: '405 / 362', overflow: 'hidden', background: PHOTO_BG }}>
+    <Box sx={{ position: 'relative', aspectRatio: '1 / 1', overflow: 'hidden', background: PHOTO_BG }}>
       {usePhoto ? (
         <Box component="picture" sx={{ display: 'contents' }}>
           <source type="image/webp" srcSet={`${asset(`assets/img/menu/${item.photo}-800.webp`)} 800w, ${asset(`assets/img/menu/${item.photo}-1400.webp`)} 1400w`}
