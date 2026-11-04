@@ -20,7 +20,7 @@ jobs:
             echo "== $u" >> report.txt
             curl -sS -o /dev/null -w "%{http_code} %{content_type} %{size_download}B\n" "https://bretlyn.com$u?nocache=$RANDOM" >> report.txt
           done
-          curl -sSI "https://bretlyn.com/" > headers.txt; curl -sSI "https://bretlyn.com/assets/img/menu/iced-americano-1400.jpg" > img-headers.txt; curl -sS -o iced-americano-1400.jpg "https://bretlyn.com/assets/img/menu/iced-americano-1400.jpg"; curl -sS -o hero-banner-1600.jpg "https://bretlyn.com/assets/img/hero-banner-1600.jpg"
+          curl -sSI "https://bretlyn.com/" > headers.txt; curl -sS "https://bretlyn.com/?x=$RANDOM" -o body503.html; curl -sSI "https://bretlyn.com/assets/img/menu/iced-americano-800.webp" > webp-headers.txt; curl -sSI "https://bretlyn.com/assets/img/menu/iced-americano-1400.jpg" > img-headers.txt; curl -sS -o iced-americano-1400.jpg "https://bretlyn.com/assets/img/menu/iced-americano-1400.jpg"; curl -sS -o hero-banner-1600.jpg "https://bretlyn.com/assets/img/hero-banner-1600.jpg"
           curl -sS "https://bretlyn.com/?nocache=$RANDOM" > home.html
           curl -sS "http://www.bretlyn.com/" -o /dev/null -w "www redirect: %{http_code} -> %{redirect_url}\n" >> report.txt
           echo | openssl s_client -servername bretlyn.com -connect bretlyn.com:443 2>/dev/null | openssl x509 -noout -subject -issuer -dates -ext subjectAltName > cert.txt || true
