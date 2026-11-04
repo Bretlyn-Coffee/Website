@@ -7,7 +7,9 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { PageHero, usePageMeta } from '../components/Blocks';
 import { brand } from '../theme';
 
-const LEGAL_EMAIL = 'support@bretlyn.com';
+import { COMPANY } from '../data/site';
+
+const LEGAL_EMAIL = COMPANY.email;
 const LEGAL_ADDRESS = 'No.235, 2nd Floor, 13th Cross, 2nd Stage, Indiranagar, Bengaluru, Karnataka -560038';
 
 function H({ children }) {

@@ -230,7 +230,7 @@ export default function Home() {
 
       <CTA title={<>Your daily cup<br />is waiting.</>}
         text="Great specialty coffee shouldn't be a once-in-a-while treat. Come make it part of your day."
-        secondary={{ href: 'mailto:contact@bretlyn.com', label: 'Contact Us' }} />
+        secondary={{ href: 'mailto:support@bretlyn.com', label: 'Contact Us' }} />
     </>
   );
 }

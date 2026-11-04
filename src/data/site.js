@@ -1,11 +1,11 @@
 // Company details shown in the footer and legal pages.
 export const COMPANY = {
   legalName: 'Bretlyn Global Private Limited',
-  email: 'contact@bretlyn.com',
+  email: 'support@bretlyn.com',
   address: [
-    '235, 2nd Floor, 13th Cross Road, 3rd Stage,',
-    'Indiranagar, Bengaluru – 560038',
-    'Karnataka, India',
+    'No.235, 2nd Floor, 13th Cross, 2nd Stage,',
+    'Indiranagar, Bengaluru,',
+    'Karnataka - 560038',
   ],
 };
 

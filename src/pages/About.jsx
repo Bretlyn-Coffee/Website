@@ -106,7 +106,7 @@ export default function About() {
         </Reveal>
       </Section>
 
-      <CTA title="Come say hello." text="Find us in Indiranagar, Bengaluru — or drop us a line at contact@bretlyn.com."
+      <CTA title="Come say hello." text="Find us in Indiranagar, Bengaluru — or drop us a line at support@bretlyn.com."
         primary={{ to: '/menu', label: 'Explore Menu' }} />
     </>
   );
