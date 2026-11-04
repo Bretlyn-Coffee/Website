@@ -26,6 +26,7 @@
 .line { display: block; overflow: hidden; }
 .line > span { display: inline-block; transform: translateY(110%); animation: rise 1s cubic-bezier(.2,.8,.2,1) forwards; }
 .line:nth-of-type(2) > span { animation-delay: .12s; }
+.line:nth-of-type(3) > span { animation-delay: .24s; }
 .outline-text { color: transparent; -webkit-text-stroke: 2px #fff; }
 
 .bean { position: absolute; width: 26px; height: 36px; border-radius: 50%;

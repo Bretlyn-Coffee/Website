@@ -36,8 +36,9 @@ function Hero() {
     }}>
       <Container sx={{ position: 'relative', zIndex: 2 }}>
         <Box sx={{ maxWidth: { lg: '44%' }, pt: { xs: 15, md: 17, lg: 12 }, pb: { xs: 4, lg: 8 } }}>
-          <Typography variant="h1" sx={{ mt: 0, mb: 3, fontSize: { xs: 'clamp(2.6rem, 13vw, 3.6rem)', sm: '4.8rem', md: '5.6rem', lg: '5.2rem', xl: '6.6rem' } }}>
-            <span className="line"><span>Happiness lies in</span></span>
+          <Typography variant="h1" sx={{ mt: 0, mb: 3, fontSize: { xs: 'clamp(2.6rem, 13vw, 3.6rem)', sm: '4.8rem', md: '5.6rem', lg: '5.8rem', xl: '7rem' } }}>
+            <span className="line"><span>Happiness</span></span>
+            <span className="line"><span>lies in</span></span>
             <span className="line"><span>every <span className="outline-text">sip.</span></span></span>
           </Typography>
           <Typography sx={{ fontSize: { xs: '1.05rem', md: '1.15rem' }, maxWidth: 480, opacity: 0.92, mb: 4 }}>
