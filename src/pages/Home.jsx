@@ -27,16 +27,16 @@ function Hero() {
   return (
     <Box component="section" sx={{
       position: 'relative', overflow: 'hidden', color: '#fff',
-      minHeight: { md: '100svh' }, display: 'flex', flexDirection: 'column', justifyContent: 'center',
+      minHeight: { lg: 'max(calc(100vw / 2.098), 640px)' }, display: 'flex', flexDirection: 'column', justifyContent: 'center',
       // Mobile: plain brand gradient behind the text; desktop: the full banner photo
       background: { xs: 'linear-gradient(180deg, #0231bd 0%, #0a4fe0 55%, #2a83f5 100%)',
-        md: `url("${banner(1600, 'jpg')}") right center / cover no-repeat, #0231bd` },
-      backgroundImage: { md: bg },
-      backgroundSize: { md: 'cover' }, backgroundPosition: { md: 'right center' }, backgroundRepeat: { md: 'no-repeat' },
+        lg: `url("${banner(1600, 'jpg')}") right center / cover no-repeat, #0231bd` },
+      backgroundImage: { lg: bg },
+      backgroundSize: { lg: 'cover' }, backgroundPosition: { lg: 'right center' }, backgroundRepeat: { lg: 'no-repeat' },
     }}>
       <Container sx={{ position: 'relative', zIndex: 2 }}>
-        <Box sx={{ maxWidth: { md: '48%', lg: '46%' }, pt: { xs: 15, md: 12 }, pb: { xs: 4, md: 10 } }}>
-          <Typography variant="h1" sx={{ mt: 0, mb: 3, fontSize: { xs: 'clamp(2.6rem, 13vw, 3.6rem)', sm: '4.8rem', md: '5.6rem', lg: '7rem' } }}>
+        <Box sx={{ maxWidth: { lg: '44%' }, pt: { xs: 15, md: 17, lg: 12 }, pb: { xs: 4, lg: 8 } }}>
+          <Typography variant="h1" sx={{ mt: 0, mb: 3, fontSize: { xs: 'clamp(2.6rem, 13vw, 3.6rem)', sm: '4.8rem', md: '5.6rem', lg: '5.2rem', xl: '6.6rem' } }}>
             <span className="line"><span>Happiness lies in</span></span>
             <span className="line"><span>every <span className="outline-text">sip.</span></span></span>
           </Typography>
@@ -57,14 +57,14 @@ function Hero() {
         </Box>
       </Container>
       {/* Mobile: show the cups from the banner below the text */}
-      <Box component="picture" sx={{ display: { xs: 'block', md: 'none' } }}>
+      <Box component="picture" sx={{ display: { xs: 'block', lg: 'none' }, maxWidth: 900, mx: 'auto', width: '100%' }}>
         <source type="image/webp" srcSet={asset('assets/img/hero-banner-mobile.webp')} />
         <Box component="img" src={asset('assets/img/hero-banner-mobile.jpg')} alt="Bretlyn hot latte, iced americano, iced latte and caramel frappé"
           width={900} height={732} fetchPriority="high"
           sx={{ width: '100%', height: 'auto', display: 'block',
             WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, #000 18%)', maskImage: 'linear-gradient(to bottom, transparent 0%, #000 18%)' }} />
       </Box>
-      <Box sx={{ position: 'absolute', left: '50%', bottom: 28, transform: 'translateX(-50%)', zIndex: 3, display: { xs: 'none', md: 'flex' },
+      <Box sx={{ position: 'absolute', left: '50%', bottom: 28, transform: 'translateX(-50%)', zIndex: 3, display: 'none',
         flexDirection: 'column', alignItems: 'center', gap: 1, fontSize: '.7rem', letterSpacing: '.3em', textTransform: 'uppercase', opacity: 0.8 }}>
         <Box component="i" sx={{ width: '1px', height: 42, background: 'linear-gradient(#fff, transparent)', animation: 'drip 2s ease-in-out infinite' }} />
         Scroll
