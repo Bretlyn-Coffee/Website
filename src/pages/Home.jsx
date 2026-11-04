@@ -21,19 +21,6 @@ const BEANS = [
   { l: '2%', b: '22%', s: 0.78, o: 0.4, d: -11 },
 ];
 
-function Compass() {
-  return (
-    <svg viewBox="0 0 400 400" fill="none" stroke="#fff" aria-hidden="true" style={{ width: '100%', height: '100%' }}>
-      <circle cx="200" cy="200" r="196" strokeOpacity=".35" strokeWidth="1.5" />
-      <circle cx="200" cy="200" r="182" strokeOpacity=".2" strokeDasharray="2 8" strokeWidth="2" />
-      <g fill="#fff" stroke="none">
-        <path d="M200 0l7 22h-14z" /><path d="M200 400l-7-22h14z" /><path d="M0 200l22-7v14z" /><path d="M400 200l-22 7v-14z" />
-        <g opacity=".7"><path d="M58.6 58.6l17 9-8 8z" /><path d="M341.4 58.6l-9 17-8-8z" /><path d="M58.6 341.4l9-17 8 8z" /><path d="M341.4 341.4l-17-9 8-8z" /></g>
-      </g>
-    </svg>
-  );
-}
-
 function Hero() {
   const visual = useRef(null);
   const onMove = (e) => {
@@ -81,24 +68,12 @@ function Hero() {
 
           <Box ref={visual} sx={{ position: 'relative', aspectRatio: '1 / 1', width: '100%', maxWidth: { xs: 'min(440px, 86vw)', md: 'none' },
             mx: 'auto', transition: `transform .3s ${ease}` }}>
-            <Box sx={{ position: 'absolute', inset: '-2%', animation: 'spin 60s linear infinite', opacity: 0.9 }}><Compass /></Box>
-            <Box sx={{ position: 'absolute', inset: '6%', borderRadius: '50%', overflow: 'hidden', boxShadow: '0 40px 80px -30px rgba(0,0,0,.55)',
-              animation: 'float 7s ease-in-out infinite',
-              '&::after': { content: '""', position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 0 0 0 6px rgba(255,255,255,.18)' } }}>
-              <Photo name="hero-cups" priority w={960} h={914} ratio="auto"
-                alt="Bretlyn hot latte, iced americano, iced latte and caramel frappé" sx={{ transform: 'scale(1.08)' }} />
+            <Box sx={{ position: 'absolute', inset: 0, borderRadius: { xs: '22px', md: '28px' }, overflow: 'hidden',
+              boxShadow: '0 40px 80px -30px rgba(0,0,0,.55)', animation: 'float 7s ease-in-out infinite',
+              '&::after': { content: '""', position: 'absolute', inset: 0, borderRadius: 'inherit', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,.18)' } }}>
+              <Photo name="hero-cups" priority w={1280} h={1279} ratio="1 / 1"
+                alt="Bretlyn hot latte, iced americano, iced latte and caramel frappé" />
             </Box>
-            <Card elevation={0} sx={{ position: 'absolute', left: { xs: 0, md: '-4%' }, bottom: '10%', display: 'flex', alignItems: 'center', gap: 1.5,
-              px: { xs: 1.6, md: 2.2 }, py: { xs: 1.2, md: 1.6 }, borderRadius: '18px', color: brand.navy,
-              boxShadow: '0 20px 40px -15px rgba(0,0,0,.4)', animation: 'float 6s ease-in-out infinite reverse' }}>
-              <BrandMark size={{ xs: 34, md: 44 }} color={brand.navy} />
-              <Box>
-                <Typography variant="h3" component="strong" sx={{ display: 'block', fontSize: { xs: '1.5rem', md: '2rem' } }}>100%</Typography>
-                <Typography sx={{ fontSize: '.72rem', letterSpacing: '.12em', textTransform: 'uppercase', opacity: 0.7, lineHeight: 1.3 }}>
-                  Indian specialty<br />arabica
-                </Typography>
-              </Box>
-            </Card>
           </Box>
         </Box>
       </Container>
