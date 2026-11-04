@@ -76,9 +76,9 @@ export default function Menu() {
     <>
       <PageHero eyebrow="Bretlyn Coffee" title="Our Menu" text="Specialty coffee and signature drinks, crafted for every day." />
       <Box component="section" sx={{ background: '#fff' }}>
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '274px 1fr' }, minHeight: { md: '80vh' } }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: 'minmax(0, 1fr)', md: '274px minmax(0, 1fr)' }, minHeight: { md: '80vh' } }}>
           {/* Sidebar (desktop) / scrolling chips (mobile) */}
-          <Box component="nav" aria-label="Menu categories" sx={{ background: SIDEBAR_BG,
+          <Box component="nav" aria-label="Menu categories" sx={{ background: SIDEBAR_BG, minWidth: 0,
             position: { xs: 'sticky', md: 'static' }, top: { xs: 56, md: 'auto' }, zIndex: 5 }}>
             <Box sx={{ position: { md: 'sticky' }, top: { md: 80 }, px: { xs: 0, md: 2 }, py: { xs: 1.2, md: 4 } }}>
               <Typography sx={{ display: { xs: 'none', md: 'block' }, fontWeight: 800, fontSize: '2.1rem', color: brand.navy,
