@@ -11,7 +11,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import BrandMark from '../brand/BrandMark';
 import Reveal, { CountUp } from '../components/Reveal';
 import { CTA, CupArt, Eyebrow, Marquee, MediaCard, Photo, Section, Split, usePageMeta } from '../components/Blocks';
-import { REGIONS } from '../data/site';
 import { brand, ease } from '../theme';
 
 const BEANS = [
@@ -108,7 +107,7 @@ export default function Home() {
       <Marquee words={['Single Origin', 'Freshly Ground', 'Freshly Brewed', 'Made in India', 'Specialty Grade', 'Everyday Habit']} />
 
       <Section bg={brand.paper}>
-        <Split media={<MediaCard tag="Farm to cup"><Photo name="beans" w={960} h={598} alt="Roasted coffee beans spilling from a woven basket beside ripe coffee cherries" ratio={{ xs: '16/10', md: '4/3' }} /></MediaCard>}>
+        <Split media={<MediaCard><Photo name="beans" w={960} h={598} alt="Roasted coffee beans spilling from a woven basket beside ripe coffee cherries" ratio={{ xs: '16/10', md: '4/3' }} /></MediaCard>}>
           <Eyebrow>Our Beans</Eyebrow>
           <Typography variant="h2" sx={{ color: brand.navy, my: 2.5, fontSize: { xs: '2.6rem', sm: '3.6rem', md: '4.8rem' } }}>
             Single origin<br />specialty coffee
@@ -117,12 +116,6 @@ export default function Home() {
             Sourced from India&apos;s finest coffee-growing regions. Every lot is traceable to the estates that grow it — shade-grown,
             hand-picked and roasted to bring out its own character.
           </Typography>
-          <Stack direction="row" useFlexGap sx={{ flexWrap: 'wrap', gap: 1, mt: 4 }}>
-            {REGIONS.map((r) => (
-              <Chip key={r} label={r} variant="outlined" sx={{ borderColor: brand.navy, color: brand.navy, transition: '.3s',
-                '&:hover': { background: brand.navy, color: '#fff' } }} />
-            ))}
-          </Stack>
         </Split>
       </Section>
 
@@ -148,59 +141,6 @@ export default function Home() {
             ))}
           </Stack>
         </Split>
-      </Section>
-
-      <Box component="section" sx={{ position: 'relative', overflow: 'hidden', color: '#fff', py: { xs: 7, md: 9 },
-        background: `linear-gradient(135deg, ${brand.royal}, ${brand.navy})` }}>
-        <BrandMark color="#fff" size={420} sx={{ position: 'absolute', right: -120, top: -120, opacity: 0.06, animation: 'spin 80s linear infinite' }} />
-        <Container sx={{ position: 'relative' }}>
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' }, gap: { xs: 4, md: 3 } }}>
-            {[[100, '%', 'Indian arabica'], [6, '', 'Growing regions'], [20, '+', 'Handcrafted drinks'], [1, '', 'Promise: great coffee']].map(([n, s, l], i) => (
-              <Reveal key={l} delay={i * 0.1}>
-                <Typography variant="h2" component="strong" sx={{ display: 'block', fontSize: { xs: '2.8rem', md: '4.6rem' } }}>
-                  <CountUp end={n} suffix={s} />
-                </Typography>
-                <Typography sx={{ fontSize: '.82rem', letterSpacing: '.16em', textTransform: 'uppercase', opacity: 0.8 }}>{l}</Typography>
-              </Reveal>
-            ))}
-          </Box>
-        </Container>
-      </Box>
-
-      <Section bg={brand.paper}>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ justifyContent: 'space-between', alignItems: { sm: 'flex-end' }, mb: 6 }}>
-          <Box>
-            <Eyebrow>Signatures</Eyebrow>
-            <Typography variant="h2" sx={{ color: brand.navy, mt: 2, fontSize: { xs: '2.6rem', sm: '3.4rem', md: '4.4rem' } }}>
-              Pick your<br />everyday ritual
-            </Typography>
-          </Box>
-          <Button component={RouterLink} to="/menu" variant="outlined" color="secondary" endIcon={<ArrowForwardIcon />}
-            sx={{ alignSelf: { xs: 'flex-start', sm: 'auto' }, '&:hover': { background: brand.navy, color: '#fff' } }}>
-            Full Menu
-          </Button>
-        </Stack>
-        <Box sx={{ display: 'grid', gap: 3, gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: 'repeat(4, 1fr)' } }}>
-          {DRINKS.map((d, i) => (
-            <Reveal key={d.name} delay={i * 0.1}>
-              <Card variant="outlined" sx={{ position: 'relative', p: 3, height: '100%', borderColor: 'rgba(10,35,120,.08)',
-                transition: `transform .5s ${ease}, box-shadow .5s ${ease}`,
-                '@media (hover:hover)': { '&:hover': { transform: 'translateY(-8px)', boxShadow: '0 30px 50px -30px rgba(10,35,120,.5)' },
-                  '&:hover svg': { transform: 'translateY(-6px) rotate(-4deg)' } } }}>
-                {d.tag && (
-                  <Chip label={d.tag} size="small" sx={{ position: 'absolute', top: 16, right: 16, zIndex: 2, background: brand.navy, color: '#fff',
-                    fontSize: '.66rem', letterSpacing: '.14em', textTransform: 'uppercase', height: 24 }} />
-                )}
-                <Box sx={{ height: 180, display: 'grid', placeItems: 'center', mb: 2.5, borderRadius: '16px', background: brand.ice,
-                  '& svg': { height: 148, width: 'auto', transition: `transform .6s ${ease}` } }}>
-                  <CupArt type={d.type} />
-                </Box>
-                <Typography variant="h3" sx={{ color: brand.navy }}>{d.name}</Typography>
-                <Typography sx={{ color: brand.muted, fontSize: '.93rem', mt: 1 }}>{d.text}</Typography>
-              </Card>
-            </Reveal>
-          ))}
-        </Box>
       </Section>
 
       <CTA title={<>Your daily cup<br />is waiting.</>}
