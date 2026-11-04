@@ -1,0 +1,19 @@
+HTTP/2 200 
+date: Wed, 04 Nov 2026 21:02:52 GMT
+content-type: image/jpeg
+content-length: 183427
+access-control-allow-methods: GET, OPTIONS
+access-control-allow-origin: *
+cache-control: public, max-age=2592000
+permissions-policy: camera=(), microphone=(), geolocation=()
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+age: 85
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: 9a6f7eac65d6dd86ad60294ede1b353f-imm-edge8
+x-hcdn-cache-status: HIT
+accept-ranges: bytes
+

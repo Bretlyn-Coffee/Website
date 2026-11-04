@@ -1,0 +1,19 @@
+HTTP/2 503 
+date: Wed, 04 Nov 2026 21:02:52 GMT
+content-type: text/html
+content-length: 807
+location: https://bretlyn.com/maintenance.html
+cache-control: private, no-cache, no-store, must-revalidate, max-age=0
+pragma: no-cache
+platform: hostinger
+panel: hpanel
+content-security-policy: upgrade-insecure-requests
+strict-transport-security: max-age=31536000
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: camera=(), microphone=(), geolocation=()
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: 1881b46c002b3cb97210cf22a7f0a08c-imm-edge10
+

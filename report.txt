@@ -1,0 +1,21 @@
+== /
+503 text/html 807B
+== /menu
+503 text/html 807B
+== /about
+503 text/html 807B
+== /about.html
+503 text/html 807B
+== /favicon.svg
+503 text/html 807B
+== /assets/img/hero-banner-2560.webp
+503 text/html 807B
+== /assets/img/hero-banner-1600.jpg
+200 image/jpeg 95668B
+== /assets/img/menu/iced-americano-800.webp
+503 text/html 807B
+== /assets/img/menu/iced-americano-1400.jpg
+200 image/jpeg 183427B
+== /assets/img/menu/coconut-latte-1400.webp
+503 text/html 807B
+www redirect: 301 -> https://www.bretlyn.com/

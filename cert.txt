@@ -1,0 +1,6 @@
+subject=CN=bretlyn.com
+issuer=C=US, O=Let's Encrypt, CN=YE2
+notBefore=Oct 30 09:39:07 2026 GMT
+notAfter=Jan 28 09:39:06 2027 GMT
+X509v3 Subject Alternative Name: 
+    DNS:bretlyn.com, DNS:www.bretlyn.com
