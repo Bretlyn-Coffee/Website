@@ -15,9 +15,8 @@ import { brand, ease } from '../theme';
 const SIDEBAR_BG = '#e8f2ff';
 const PHOTO_BG = 'radial-gradient(70% 60% at 50% 40%, #a9cfff 0%, #3d8bff 45%, #0a6cff 100%)';
 
-function DrinkImage({ item, temp }) {
-  // Photo for the hot version; illustration when there's no photo (or for iced, until iced photos are added).
-  const usePhoto = item.photo && temp !== 'iced';
+function DrinkImage({ item }) {
+  const usePhoto = Boolean(item.photo);
   return (
     <Box sx={{ position: 'relative', aspectRatio: '405 / 362', overflow: 'hidden', background: PHOTO_BG }}>
       {usePhoto ? (
@@ -28,29 +27,30 @@ function DrinkImage({ item, temp }) {
             src={asset(`assets/img/menu/${item.photo}-800.jpg`)}
             srcSet={`${asset(`assets/img/menu/${item.photo}-800.jpg`)} 800w, ${asset(`assets/img/menu/${item.photo}-1400.jpg`)} 1400w`}
             sizes="(max-width:600px) 92vw, (max-width:1240px) 45vw, 400px"
-            sx={{ width: '100%', height: '100%', objectFit: 'cover', transition: `transform 1s ${ease}` }} />
+            sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center bottom', transition: `transform 1s ${ease}` }} />
         </Box>
       ) : (
         <Box sx={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center',
           '&::after': { content: '""', position: 'absolute', left: 0, right: 0, bottom: 0, height: '12%', background: 'linear-gradient(#f4f7ff, #fff)' },
           '& svg': { height: '62%', width: 'auto', position: 'relative', zIndex: 1, mt: '6%', transition: `transform .6s ${ease}` } }}>
-          <CupArt type={temp === 'iced' ? 'latte' : item.art || 'hot'} />
+          <CupArt type={item.art || 'hot'} />
         </Box>
       )}
     </Box>
   );
 }
 
-function DrinkCard({ item, temp }) {
+function DrinkCard({ item: base, temp }) {
+  const item = temp === 'iced' && base.iced ? base.iced : base;
   return (
     <Card variant="outlined" sx={{ height: '100%', borderRadius: '6px', borderColor: '#d9dff0', overflow: 'hidden',
       transition: `transform .45s ${ease}, box-shadow .45s ${ease}`,
       '@media (hover:hover)': { '&:hover': { transform: 'translateY(-6px)', boxShadow: '0 24px 40px -24px rgba(10,35,120,.45)' },
         '&:hover img': { transform: 'scale(1.04)' }, '&:hover svg': { transform: 'translateY(-4px) rotate(-3deg)' } } }}>
-      <DrinkImage item={item} temp={temp} />
+      <DrinkImage item={item} />
       <Box sx={{ px: 2, pt: 2, pb: 2.5 }}>
         <Typography component="h3" sx={{ fontWeight: 700, color: brand.navy, fontSize: { xs: '1.25rem', md: '1.35rem' }, mb: 1.2 }}>
-          {temp === 'iced' && item.photo ? `Iced ${item.name}` : item.name}
+          {item.name}
         </Typography>
         {item.lines.map((l) => (
           <Typography key={l} sx={{ color: '#3a4366', fontSize: '.92rem', lineHeight: 1.75 }}>{l}</Typography>
@@ -109,10 +109,15 @@ export default function Menu() {
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between',
               alignItems: { xs: 'flex-start', sm: 'flex-start' }, gap: 2, mb: 4 }}>
               <Box>
+                {cat.eyebrow && (
+                  <Typography sx={{ fontWeight: 800, color: brand.navy, letterSpacing: '.12em', textTransform: 'uppercase', fontSize: { xs: '.9rem', md: '1.05rem' }, mb: 0.5 }}>
+                    {cat.eyebrow}
+                  </Typography>
+                )}
                 <Typography component="h2" sx={{ fontWeight: 800, color: brand.navy, fontSize: { xs: '2rem', md: '2.8rem' }, lineHeight: 1.15 }}>
                   {cat.name}
                 </Typography>
-                <Typography sx={{ color: '#5a6280', fontSize: { xs: '1.05rem', md: '1.25rem' }, mt: 0.5 }}>{cat.sub}</Typography>
+                {cat.sub && <Typography sx={{ color: '#5a6280', fontSize: { xs: '1.05rem', md: '1.25rem' }, mt: 0.5 }}>{cat.sub}</Typography>}
               </Box>
               {cat.hotIced && (
                 <ToggleButtonGroup exclusive value={temp} onChange={(_, v) => v && setTemp(v)} aria-label="Hot or iced"
@@ -130,7 +135,7 @@ export default function Menu() {
               <Box key={`${cat.id}-${temp}`} sx={{ display: 'grid', gap: { xs: 2.5, md: 2.5 },
                 gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: 'repeat(3, 1fr)' } }}>
                 {cat.items.map((it, i) => (
-                  <Reveal key={it.name} delay={i * 0.06}><DrinkCard item={it} temp={temp} /></Reveal>
+                  <Reveal key={`${it.name}-${temp}`} delay={i * 0.06}><DrinkCard item={it} temp={temp} /></Reveal>
                 ))}
               </Box>
             ) : (

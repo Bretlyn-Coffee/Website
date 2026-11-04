@@ -39,6 +39,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
+  // Pages without a dark hero at the top need a solid header bar from the start.
+  const solid = scrolled || ['/about'].includes(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -55,9 +57,9 @@ export default function Header() {
         position="fixed"
         elevation={0}
         sx={{
-          background: scrolled ? 'rgba(10,35,120,.96)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(10px)' : 'none',
-          boxShadow: scrolled ? '0 10px 30px -15px rgba(0,0,0,.4)' : 'none',
+          background: solid ? 'rgba(10,35,120,.96)' : 'transparent',
+          backdropFilter: solid ? 'blur(10px)' : 'none',
+          boxShadow: solid ? '0 10px 30px -15px rgba(0,0,0,.4)' : 'none',
           transition: `all .4s ${ease}`,
           py: { xs: scrolled ? 0.25 : 0.75, md: scrolled ? 0.5 : 1.5 },
         }}

@@ -44,8 +44,7 @@ function Hero() {
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.05fr 1fr' }, gap: { xs: 5, md: 6 }, alignItems: 'center',
           pt: { xs: 15, md: 12 }, pb: { xs: 10, md: 8 } }}>
           <Box>
-            <Eyebrow color="#fff">Specialty Coffee · Bengaluru</Eyebrow>
-            <Typography variant="h1" sx={{ my: 3, fontSize: { xs: 'clamp(2.6rem, 13vw, 3.6rem)', sm: '4.8rem', md: '6rem', lg: '7.2rem' } }}>
+            <Typography variant="h1" sx={{ mt: 0, mb: 3, fontSize: { xs: 'clamp(2.6rem, 13vw, 3.6rem)', sm: '4.8rem', md: '6rem', lg: '7.2rem' } }}>
               <span className="line"><span>Happiness lies in</span></span>
               <span className="line"><span>every <span className="outline-text">sip.</span></span></span>
             </Typography>
