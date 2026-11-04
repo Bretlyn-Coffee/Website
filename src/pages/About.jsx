@@ -1,9 +1,10 @@
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import { Eyebrow, MediaCard, Photo, Section, Split, usePageMeta } from '../components/Blocks';
+import Box from '@mui/material/Box';
+import { Eyebrow, Section, usePageMeta } from '../components/Blocks';
 import { brand } from '../theme';
 
-const body = { color: '#2a3a72', fontSize: { xs: '1.02rem', md: '1.12rem' }, maxWidth: 560 };
+const body = { color: '#2a3a72', fontSize: { xs: '1.02rem', md: '1.12rem' }, maxWidth: 760 };
 
 export default function About() {
   usePageMeta('About Us — Bretlyn Coffee',
@@ -11,7 +12,7 @@ export default function About() {
   return (
     <>
       <Section bg={brand.paper} sx={{ pt: { xs: 14, md: 20 } }}>
-        <Split reverse media={<MediaCard tag="Our Story"><Photo name="espresso" w={960} h={939} ratio={{ xs: '16/10', md: '4/5' }} alt="Espresso pouring into a blue Bretlyn cup" /></MediaCard>}>
+        <Box sx={{ maxWidth: 820 }}>
           <Eyebrow>Our Story</Eyebrow>
           <Typography variant="h2" sx={{ color: brand.navy, my: 2.5, fontSize: { xs: '2.6rem', sm: '3.6rem', md: '4.4rem' } }}>
             Great coffee,<br />every day
@@ -34,7 +35,7 @@ export default function About() {
               and finding joy in the little things.
             </Typography>
           </Stack>
-        </Split>
+        </Box>
       </Section>
 
     </>

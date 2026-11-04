@@ -12,6 +12,7 @@ import BrandMark from '../brand/BrandMark';
 import Reveal, { CountUp } from '../components/Reveal';
 import { CTA, CupArt, Eyebrow, Marquee, MediaCard, Photo, Section, Split, usePageMeta } from '../components/Blocks';
 import { brand, ease } from '../theme';
+import { asset } from '../base';
 
 const BEANS = [
   { l: '6%', t: '18%', s: 1, o: 0.55, d: -2 }, { l: '42%', t: '12%', s: 0.7, o: 0.35, d: -6 },
@@ -21,63 +22,48 @@ const BEANS = [
 ];
 
 function Hero() {
-  const visual = useRef(null);
-  const onMove = (e) => {
-    if (!visual.current || !window.matchMedia('(pointer:fine)').matches) return;
-    const x = (e.clientX / window.innerWidth - 0.5) * 18;
-    const y = (e.clientY / window.innerHeight - 0.5) * 18;
-    visual.current.style.transform = `translate(${x}px, ${y}px)`;
-  };
+  const banner = (w, ext) => asset(`assets/img/hero-banner-${w}.${ext}`);
+  const bg = `image-set(url("${banner(1600, 'webp')}") type("image/webp") 1x, url("${banner(2560, 'webp')}") type("image/webp") 2x, url("${banner(1600, 'jpg')}") type("image/jpeg") 1x)`;
   return (
-    <Box component="section" onMouseMove={onMove} sx={{
-      position: 'relative', overflow: 'hidden', color: '#fff', display: 'flex', alignItems: 'center',
-      minHeight: { md: '100svh' },
-      background: 'radial-gradient(90% 80% at 74% 48%, #004ca2 0%, #00408c 38%, #00316f 70%, #062258 100%)',
+    <Box component="section" sx={{
+      position: 'relative', overflow: 'hidden', color: '#fff',
+      minHeight: { md: '100svh' }, display: 'flex', flexDirection: 'column', justifyContent: 'center',
+      // Mobile: plain brand gradient behind the text; desktop: the full banner photo
+      background: { xs: 'linear-gradient(180deg, #0231bd 0%, #0a4fe0 55%, #2a83f5 100%)',
+        md: `url("${banner(1600, 'jpg')}") right center / cover no-repeat, #0231bd` },
+      backgroundImage: { md: bg },
+      backgroundSize: { md: 'cover' }, backgroundPosition: { md: 'right center' }, backgroundRepeat: { md: 'no-repeat' },
     }}>
-      <Box aria-hidden sx={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-        {BEANS.map((b, i) => (
-          <span key={i} className="bean" style={{ left: b.l, right: b.r, top: b.t, bottom: b.b, opacity: b.o,
-            width: 26 * b.s, height: 36 * b.s, animationDelay: `${b.d}s` }} />
-        ))}
-      </Box>
       <Container sx={{ position: 'relative', zIndex: 2 }}>
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.05fr 1fr' }, gap: { xs: 5, md: 6 }, alignItems: 'center',
-          pt: { xs: 15, md: 12 }, pb: { xs: 10, md: 8 } }}>
-          <Box>
-            <Typography variant="h1" sx={{ mt: 0, mb: 3, fontSize: { xs: 'clamp(2.6rem, 13vw, 3.6rem)', sm: '4.8rem', md: '6rem', lg: '7.2rem' } }}>
-              <span className="line"><span>Happiness lies in</span></span>
-              <span className="line"><span>every <span className="outline-text">sip.</span></span></span>
-            </Typography>
-            <Typography sx={{ fontSize: { xs: '1.05rem', md: '1.15rem' }, maxWidth: 480, opacity: 0.92, mb: 4 }}>
-              Bretlyn started to transform specialty coffee from an occasional treat into an everyday habit — delivering
-              high-quality specialty coffee, affordable and accessible to everyone.
-            </Typography>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-              <Button component={RouterLink} to="/menu" variant="contained" endIcon={<ArrowForwardIcon />}
-                sx={{ background: '#fff', color: brand.royal, '&:hover': { background: brand.navy, color: '#fff' } }}>
-                Explore Menu
-              </Button>
-              <Button component={RouterLink} to="/about" variant="outlined"
-                sx={{ color: '#fff', borderColor: '#fff', '&:hover': { background: '#fff', color: brand.royal, borderColor: '#fff' } }}>
-                Our Story
-              </Button>
-            </Stack>
-          </Box>
-
-          <Box ref={visual} sx={{ position: 'relative', aspectRatio: '1 / 1', width: '100%', maxWidth: { xs: 'min(440px, 86vw)', md: 'none' },
-            mx: 'auto', transition: `transform .3s ${ease}` }}>
-            <Box sx={{ position: 'absolute', inset: '-4%', animation: 'float 7s ease-in-out infinite',
-              // Feather every edge so the photo melts into the hero background instead of looking like a separate card
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 10%, #000 72%, transparent 100%)',
-              WebkitMaskComposite: 'source-in',
-              maskImage: 'linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 10%, #000 72%, transparent 100%)',
-              maskComposite: 'intersect' }}>
-              <Photo name="hero-cups" priority w={1280} h={1279} ratio="1 / 1"
-                alt="Bretlyn hot latte, iced americano, iced latte and caramel frappé" sx={{ filter: 'none' }} />
-            </Box>
-          </Box>
+        <Box sx={{ maxWidth: { md: '48%', lg: '46%' }, pt: { xs: 15, md: 12 }, pb: { xs: 4, md: 10 } }}>
+          <Typography variant="h1" sx={{ mt: 0, mb: 3, fontSize: { xs: 'clamp(2.6rem, 13vw, 3.6rem)', sm: '4.8rem', md: '5.6rem', lg: '7rem' } }}>
+            <span className="line"><span>Happiness lies in</span></span>
+            <span className="line"><span>every <span className="outline-text">sip.</span></span></span>
+          </Typography>
+          <Typography sx={{ fontSize: { xs: '1.05rem', md: '1.15rem' }, maxWidth: 480, opacity: 0.92, mb: 4 }}>
+            Bretlyn started to transform specialty coffee from an occasional treat into an everyday habit — delivering
+            high-quality specialty coffee, affordable and accessible to everyone.
+          </Typography>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <Button component={RouterLink} to="/menu" variant="contained" endIcon={<ArrowForwardIcon />}
+              sx={{ background: '#fff', color: brand.royal, '&:hover': { background: brand.navy, color: '#fff' } }}>
+              Explore Menu
+            </Button>
+            <Button component={RouterLink} to="/about" variant="outlined"
+              sx={{ color: '#fff', borderColor: '#fff', '&:hover': { background: '#fff', color: brand.royal, borderColor: '#fff' } }}>
+              Our Story
+            </Button>
+          </Stack>
         </Box>
       </Container>
+      {/* Mobile: show the cups from the banner below the text */}
+      <Box component="picture" sx={{ display: { xs: 'block', md: 'none' } }}>
+        <source type="image/webp" srcSet={asset('assets/img/hero-banner-mobile.webp')} />
+        <Box component="img" src={asset('assets/img/hero-banner-mobile.jpg')} alt="Bretlyn hot latte, iced americano, iced latte and caramel frappé"
+          width={900} height={732} fetchPriority="high"
+          sx={{ width: '100%', height: 'auto', display: 'block',
+            WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, #000 18%)', maskImage: 'linear-gradient(to bottom, transparent 0%, #000 18%)' }} />
+      </Box>
       <Box sx={{ position: 'absolute', left: '50%', bottom: 28, transform: 'translateX(-50%)', zIndex: 3, display: { xs: 'none', md: 'flex' },
         flexDirection: 'column', alignItems: 'center', gap: 1, fontSize: '.7rem', letterSpacing: '.3em', textTransform: 'uppercase', opacity: 0.8 }}>
         <Box component="i" sx={{ width: '1px', height: 42, background: 'linear-gradient(#fff, transparent)', animation: 'drip 2s ease-in-out infinite' }} />
