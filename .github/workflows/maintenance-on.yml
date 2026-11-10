@@ -24,7 +24,7 @@ jobs:
           echo "$SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           for i in 1 2 3; do ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts && break; sleep 5; done
-          ssh -p "$SSH_PORT" -i ~/.ssh/id_ed25519 "$SSH_USER@$SSH_HOST" "cd '$REMOTE_DIR' && test -f .htaccess.maintenance && cp .htaccess .htaccess.live && cp .htaccess.maintenance .htaccess && ls -la maintenance.html .htaccess*"
+          ssh -p "$SSH_PORT" -i ~/.ssh/id_ed25519 "$SSH_USER@$SSH_HOST" "cd '$REMOTE_DIR' && ls -la | grep -i 'htaccess\|maint' ; if [ -f .htaccess.maintenance ]; then cp .htaccess .htaccess.live && cp .htaccess.maintenance .htaccess && echo SWITCHED; else echo NO_BACKUP; fi"
       - name: Check site
         run: |
           sleep 5
