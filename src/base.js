@@ -7,4 +7,10 @@ export const BASE = (() => {
 })();
 
 /** Build a URL to a file in public/, e.g. asset('assets/img/logo.svg'). */
-export const asset = (p) => BASE + String(p).replace(/^\/+/, '');
+// Images get a per-build version tag so browsers and the CDN fetch fresh copies after
+// every deploy instead of showing a cached old photo with the same file name.
+const VER = typeof __BUILD_ID__ !== 'undefined' ? __BUILD_ID__ : '';
+export const asset = (p) => {
+  const url = BASE + String(p).replace(/^\/+/, '');
+  return VER && /\.(jpe?g|png|webp|svg)$/i.test(url) ? `${url}?v=${VER}` : url;
+};
