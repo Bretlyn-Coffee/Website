@@ -43,11 +43,15 @@ jobs:
           SSH_USER: ${{ secrets.HOSTINGER_USER }}
           REMOTE_DIR: ${{ secrets.HOSTINGER_PATH }}
         run: |
+          # .htaccess and maintenance.html are managed by hand on the server
+          # (e.g. maintenance mode), so never overwrite or delete them.
           rsync -avz --delete \
+            --exclude='.htaccess' --exclude='maintenance.html' \
             -e "ssh -p $SSH_PORT -i ~/.ssh/id_ed25519" \
             ./dist/ "$SSH_USER@$SSH_HOST:$REMOTE_DIR/"
 
       - name: Smoke test
         run: |
           sleep 5
-          curl -fsSIL https://bretlyn.com | head -n 1
+          # 503 is expected while the site is in maintenance mode
+          curl -sSIL https://bretlyn.com | head -n 1
