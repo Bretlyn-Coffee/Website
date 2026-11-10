@@ -1,10 +1,7 @@
 name: Maintenance mode ON
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/maintenance-on.yml']
+  workflow_dispatch:  # run by hand: Actions tab → this workflow → Run workflow
 
 jobs:
   off:
@@ -12,7 +9,7 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v4
-      - name: Put back the maintenance .htaccess (saved as .htaccess.maintenance)
+      - name: Install maintenance page and 503 rules
         env:
           SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
           SSH_HOST: ${{ secrets.HOSTINGER_HOST }}
@@ -24,7 +21,8 @@ jobs:
           echo "$SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           for i in 1 2 3; do ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts && break; sleep 5; done
-          ssh -p "$SSH_PORT" -i ~/.ssh/id_ed25519 "$SSH_USER@$SSH_HOST" "cd '$REMOTE_DIR' && ls -la | grep -i 'htaccess\|maint' ; if [ -f .htaccess.maintenance ]; then cp .htaccess .htaccess.live && cp .htaccess.maintenance .htaccess && echo SWITCHED; else echo NO_BACKUP; fi"
+          scp -P "$SSH_PORT" -i ~/.ssh/id_ed25519 maintenance/maintenance.html "$SSH_USER@$SSH_HOST:$REMOTE_DIR/maintenance.html"
+          scp -P "$SSH_PORT" -i ~/.ssh/id_ed25519 maintenance/htaccess "$SSH_USER@$SSH_HOST:$REMOTE_DIR/.htaccess"
       - name: Check site
         run: |
           sleep 5

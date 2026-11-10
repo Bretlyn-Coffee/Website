@@ -1,10 +1,7 @@
 name: Maintenance mode OFF
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/maintenance-off.yml']
+  workflow_dispatch:  # run by hand: Actions tab → this workflow → Run workflow
 
 jobs:
   off:
@@ -12,7 +9,7 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v4
-      - name: Restore normal .htaccess (backup kept as .htaccess.maintenance)
+      - name: Restore normal .htaccess
         env:
           SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
           SSH_HOST: ${{ secrets.HOSTINGER_HOST }}
@@ -23,9 +20,8 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts
+          for i in 1 2 3; do ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts && break; sleep 5; done
           S="ssh -p $SSH_PORT -i ~/.ssh/id_ed25519 $SSH_USER@$SSH_HOST"
-          $S "cd '$REMOTE_DIR' && [ -f .htaccess ] && cp .htaccess .htaccess.maintenance || true"
           scp -P "$SSH_PORT" -i ~/.ssh/id_ed25519 public/.htaccess "$SSH_USER@$SSH_HOST:$REMOTE_DIR/.htaccess"
       - name: Check site
         run: |

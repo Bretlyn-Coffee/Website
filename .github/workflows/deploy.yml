@@ -46,7 +46,7 @@ jobs:
           # .htaccess and maintenance.html are managed by hand on the server
           # (e.g. maintenance mode), so never overwrite or delete them.
           rsync -avz --delete \
-            --exclude='.htaccess' --exclude='maintenance.html' \
+            --exclude='.htaccess*' --exclude='maintenance.html' \
             -e "ssh -p $SSH_PORT -i ~/.ssh/id_ed25519" \
             ./dist/ "$SSH_USER@$SSH_HOST:$REMOTE_DIR/"
 
