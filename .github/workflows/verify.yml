@@ -27,6 +27,8 @@ jobs:
           md5sum iced-americano-1400.jpg iced-americano-v.jpg >> report.txt
           curl -sS "http://www.bretlyn.com/" -o /dev/null -w "www redirect: %{http_code} -> %{redirect_url}\n" >> report.txt
           echo | openssl s_client -servername bretlyn.com -connect bretlyn.com:443 2>/dev/null | openssl x509 -noout -subject -issuer -dates -ext subjectAltName > cert.txt || true
+      - name: Show photo checksums
+        run: cd out && md5sum hazelnut-live.* && file hazelnut-live.* && grep -o 'assets/index-[^"]*\.js' home.html
       - name: Save report
         uses: actions/upload-artifact@v4
         with:
