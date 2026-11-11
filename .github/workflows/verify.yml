@@ -19,6 +19,7 @@ jobs:
           done
           curl -sSI "https://bretlyn.com/" > headers.txt; curl -sS "https://bretlyn.com/?x=$RANDOM" -o body503.html; curl -sSI "https://bretlyn.com/assets/img/menu/iced-americano-800.webp" > webp-headers.txt; curl -sSI "https://bretlyn.com/assets/img/menu/iced-americano-1400.jpg" > img-headers.txt; curl -sS -o iced-americano-1400.jpg "https://bretlyn.com/assets/img/menu/iced-americano-1400.jpg"; curl -sS -o hero-banner-1600.jpg "https://bretlyn.com/assets/img/hero-banner-1600.jpg"
           curl -sS "https://bretlyn.com/?nocache=$RANDOM" > home.html
+          curl -sS -o hazelnut-live.jpg "https://bretlyn.com/assets/img/menu/hazelnut-latte-800.jpg?n=$RANDOM"; curl -sS -o hazelnut-live.webp "https://bretlyn.com/assets/img/menu/hazelnut-latte-800.webp?n=$RANDOM"
           for js in $(grep -o 'static/[^"]*\.js' home.html); do curl -sS "https://bretlyn.com/$js" >> bundle.js; done
           grep -o '__v_check\|?v=\${[^}]*}\|"[a-z0-9]\{8,9\}"' bundle.js | head -5 > bundle-ver.txt || true
           V=$(grep -o 'iced-americano' bundle.js | head -1); echo "bundle has menu: $V" >> report.txt
