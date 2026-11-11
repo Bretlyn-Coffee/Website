@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          git init -q tmp && cd tmp
           for b in mui-dev preview-build verify-output; do
             git push "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" --delete "$b" || true
           done
