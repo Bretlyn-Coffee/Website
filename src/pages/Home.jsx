@@ -37,9 +37,9 @@ function Hero() {
       <Container sx={{ position: 'relative', zIndex: 2 }}>
         <Box sx={{ maxWidth: { lg: '44%' }, pt: { xs: 15, md: 17, lg: 12 }, pb: { xs: 4, lg: 8 } }}>
           <Typography variant="h1" sx={{ mt: 0, mb: 3, fontSize: { xs: 'clamp(2.6rem, 13vw, 3.6rem)', sm: '4.8rem', md: '5.6rem', lg: '5.8rem', xl: '7rem' } }}>
-            <span className="line"><span>Happiness</span></span>
-            <span className="line"><span>lies in</span></span>
-            <span className="line"><span>every <span className="outline-text">sip.</span></span></span>
+            <span className="line"><span>Daily by habit,</span></span>
+            <span className="line"><span>not luxury</span></span>
+            <span className="line"><span>by <span className="outline-text">choice.</span></span></span>
           </Typography>
           <Typography sx={{ fontSize: { xs: '1.05rem', md: '1.15rem' }, maxWidth: 480, opacity: 0.92, mb: 4 }}>
             Bretlyn started to transform specialty coffee from an occasional treat into an everyday habit — delivering
@@ -88,7 +88,7 @@ const STEPS = [
 ];
 
 export default function Home() {
-  usePageMeta('Bretlyn Coffee — Happiness Lies in Every Sip',
+  usePageMeta('Bretlyn Coffee — Daily by Habit, Not Luxury by Choice',
     'Bretlyn Coffee brings high-quality, single origin Indian specialty coffee to everyone — freshly ground, freshly brewed, affordable and accessible.');
   return (
     <>
@@ -102,8 +102,7 @@ export default function Home() {
             Single origin<br />specialty coffee
           </Typography>
           <Typography sx={{ color: '#2a3a72', fontSize: { xs: '1.02rem', md: '1.12rem' }, maxWidth: 520 }}>
-            Sourced from India&apos;s finest coffee-growing regions. Every lot is traceable to the estates that grow it — shade-grown,
-            hand-picked and roasted to bring out its own character.
+            Sourced from India&apos;s finest coffee-growing regions.
           </Typography>
         </Split>
       </Section>

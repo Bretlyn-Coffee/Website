@@ -11,18 +11,15 @@ const h2 = { color: brand.navy, mt: 2, mb: 2.5, fontSize: { xs: '2.4rem', sm: '3
 
 export default function About() {
   usePageMeta('About Us — Bretlyn Coffee',
-    'Bretlyn Coffee is a new-age specialty coffee experience, made for every day — quality-crafted specialty coffee, signature beverages and approachable prices.');
+    'Bretlyn Coffee is a new-age specialty coffee experience, made for every day — carefully crafted coffee, signature beverages and approachable prices.');
   return (
     <>
       {/* Intro */}
       <Section bg={brand.paper} sx={{ pt: { xs: 14, md: 20 }, pb: { xs: 6, md: 8 } }}>
         <Box sx={{ maxWidth: 900 }}>
           <Eyebrow>About Us</Eyebrow>
-          <Typography sx={{ fontFamily: display, fontWeight: 800, letterSpacing: '.08em', color: brand.royal, fontSize: { xs: '1.6rem', md: '2rem' }, mt: 3 }}>
+          <Typography variant="h1" component="h1" sx={{ color: brand.navy, mt: 3, mb: 2, letterSpacing: '.04em', fontSize: { xs: '2.9rem', sm: '4rem', md: '5.4rem' } }}>
             BRETLYN 💙
-          </Typography>
-          <Typography variant="h1" component="h1" sx={{ color: brand.navy, mt: 1, mb: 2, fontSize: { xs: '2.9rem', sm: '4rem', md: '5.4rem' } }}>
-            Happiness lies in every sip.
           </Typography>
           <Typography sx={{ ...body, fontSize: { xs: '1.15rem', md: '1.35rem' }, color: brand.navy }}>
             A new-age specialty coffee experience, made for every day.
@@ -37,19 +34,24 @@ export default function About() {
             <Typography variant="h2" sx={h2}>Our Story</Typography>
             <Stack spacing={2}>
               <Typography sx={body}>
-                At Bretlyn Coffee, we believe that great coffee should be a part of everyday life. The name Bretlyn represents the
-                richness of coffee&apos;s origins and natural flavours that inspire us to create a new coffee experience.
+                At Bretlyn Coffee, we believe that great coffee should be a part of everyday life, not just an occasional luxury.
               </Typography>
               <Typography sx={body}>
-                We believe good coffee shouldn&apos;t feel complicated, exclusive or expensive. We bring together quality-crafted
-                specialty coffee, delicious signature beverages and approachable prices to make every cup an enjoyable experience.
+                The name Bretlyn is inspired by the Italian philosophy of <Box component="em" sx={{ color: brand.navy }}>&ldquo;Dolce Far
+                Niente&rdquo; &mdash; the sweetness of doing nothing</Box>, celebrating life&apos;s simple pleasures and finding joy in the
+                little moments.
+              </Typography>
+              <Typography sx={body}>
+                We believe specialty coffee shouldn&apos;t feel complicated, exclusive or expensive. We bring together carefully
+                crafted coffee, delicious signature beverages and approachable prices to make quality coffee accessible to everyone,
+                every day.
               </Typography>
               <Typography sx={body}>
                 Designed around today&apos;s fast-paced lifestyles, our modern grab-and-go concept makes it easier to enjoy great
-                coffee on the go, wherever life takes you.
+                coffee wherever life takes you.
               </Typography>
               <Typography sx={{ ...body, color: brand.navy, fontWeight: 600 }}>
-                Because happiness isn&apos;t always about the big moments. Sometimes, it&apos;s about slowing down, savouring every sip,
+                Because happiness isn&apos;t always about the big moments. Sometimes, it&apos;s about slowing down, savoring every sip,
                 and finding joy in the little things.
               </Typography>
             </Stack>
